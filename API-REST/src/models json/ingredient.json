@@ -1,0 +1,14 @@
+[
+    {
+    "id_ingredient":"1",
+    "name_ingredient":"bla1",
+    "type_ingredient":"lastname1"
+
+}
+, {
+    "id_ingredient":"2",
+    "name_ingredient":"bla12",
+    "type_ingredient":"lastname12"
+
+}
+]

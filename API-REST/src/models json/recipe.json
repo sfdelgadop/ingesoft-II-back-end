@@ -1,0 +1,20 @@
+[
+    {
+    "id_recipe":"1",
+    "name_recipe":"bla1",
+    "type_recipe":"lastname1",
+    "details":"12",
+    "likes":"male",
+    "creator":"12"
+
+}
+, {
+    "id_recipe":"2",
+    "name_recipe":"bla12",
+    "type_recipe":"lastname12",
+    "details":"122",
+    "likes":"male2",
+    "creator":"122"
+
+}
+]
