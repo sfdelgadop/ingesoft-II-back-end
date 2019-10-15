@@ -16,13 +16,8 @@ RegionController.getAll = (req, res, next) => {
 }
 
 RegionController.getOne = (req, res, next) => {
-<<<<<<< HEAD
-	let region_id = req.params.region_id
-	//console.log(region_id)
-=======
 	let id_region = req.params.id_region
 	console.log(id_region)
->>>>>>> 5c756b77986cccdd451080fdafae387700c3175f
 
 	RegionModel.getOne(id_region, (docs) => {
 		let locals = {
@@ -34,13 +29,6 @@ RegionController.getOne = (req, res, next) => {
 	})
 }
 
-<<<<<<< HEAD
-RegionController.save = (req, res, next) => {
-	console.log(res);
-	
-	let region = {
-		region_id : req.body.region_id,
-=======
 RegionController.save = (req, res) => {
 	console.log(req.body);
 	console.log(req.body.data);
@@ -48,20 +36,13 @@ RegionController.save = (req, res) => {
 	 var region = {
 		
 		id_region : req.body.id_region,
->>>>>>> 5c756b77986cccdd451080fdafae387700c3175f
 		name_region : req.body.name_region
 		
 	}
-<<<<<<< HEAD
-
-	console.log(region)
-
-=======
 	
 	console.log("controlador")
 	console.log(region.name_region)
 	console.log(region.id_region)
->>>>>>> 5c756b77986cccdd451080fdafae387700c3175f
 	RegionModel.save( region, () => res.redirect('/ver-region') )
 }
 
