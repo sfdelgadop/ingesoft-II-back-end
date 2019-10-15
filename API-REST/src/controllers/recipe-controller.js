@@ -4,14 +4,14 @@ var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
 
 RecipeController.getAll = (req, res, next) => {
-	console.log("hola")
+	//console.log("hola")
 	RecipeModel.getAll((docs) => {
 		let locals = {
 			title : 'Lista de Recetas',
 			data : docs
 		}
 
-		res.render('index', locals)
+		//res.render('index', locals)
 	})
 }
 
@@ -25,7 +25,7 @@ RecipeController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('edit-recipe', locals)
+		//res.render('edit-recipe', locals)
 	})
 }
 
@@ -64,7 +64,7 @@ RecipeController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.render('error', locals)
+	//res.render('error', locals)
 
 	next()
 }

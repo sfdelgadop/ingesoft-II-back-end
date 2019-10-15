@@ -10,7 +10,7 @@ RecipeModel.getAll = (cb) => {
 		.exec((err, docs) => {
 			if(err) throw err
             cb(docs)
-            //console.log("hola")
+            //console.log(docs)
 		})
 }
 
@@ -19,7 +19,8 @@ RecipeModel.getOne = (id, cb) => {
 		.findOne({recipe_id : id})
 		.exec((err, docs) => {
 			if(err) throw err
-			cb(docs)
+            cb(docs)
+            console.log(docs)
         })
 }
 
