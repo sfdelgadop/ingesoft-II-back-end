@@ -1,18 +1,25 @@
 'use strict'
 
 var RecipeController = require('../controllers/recipe-controller'),
+
+CommentsController = require('../controllers/comments-controller'),
+IngredientController = require('../controllers/ingredient-controller'),
+LikesController = require('../controllers/likes-controller'),
+RegionController = require('../controllers/region-controller'),
+
 	express = require('express'),
 	router = express.Router()
-
+    
 router
-    .get('/', RecipeController.getAll)
+    
+    .get('/recipe', RecipeController.getAll)/*
     .get('/agregar', RecipeController.addForm)
     .post('/', RecipeController.save)
     .get('/editar/:recipe_id', RecipeController.getOne)
     .put('/actualizar/:recipe_id', RecipeController.save)
     .delete('/eliminar/:recipe_id', RecipeController.delete)
     .use(RecipeController.error404)
-
+/*
     .get('/', CommentsController.getAll)
     .get('/agregar', CommentsController.addForm)
     .post('/', CommentsController.save)
@@ -43,7 +50,7 @@ router
     .get('/editar/:region_id', RegionController.getOne)
     .put('/actualizar/:region_id', RegionController.save)
     .delete('/eliminar/:region_id', RegionController.delete)
-    .use(RegionController.error404)
+    .use(RegionController.error404)*/
 
 
 	

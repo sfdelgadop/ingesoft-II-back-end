@@ -1,6 +1,6 @@
 'use strict'
 
-var LikesModel = require('../models/Likes-model'),
+var LikesModel = require('../models json/Likes-model'),
 	LikesController = () => {}
 
 LikesController.getAll = (req, res, next) => {

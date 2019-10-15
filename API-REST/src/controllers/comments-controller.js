@@ -1,6 +1,6 @@
 'use strict'
 
-var CommentsModel = require('../models/comments-model'),
+var CommentsModel = require('../models json/comments-model'),
 	CommentsController = () => {}
 
 CommentsController.getAll = (req, res, next) => {

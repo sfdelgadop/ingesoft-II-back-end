@@ -7,10 +7,10 @@ var express = require('express'),
 	morgan = require('morgan'),
 	restFul = require('express-method-override')('_method'),
 	routes = require('./routes/recipe'),
-	//faviconURL = `${__dirname}/public/img/node-favicon.png`,
+	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
-	port = (process.env.PORT || 3000),
+	port = (process.env.PORT || 3000 || 27017),
 	app = express()
 
 app

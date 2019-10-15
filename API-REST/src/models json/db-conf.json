@@ -1,6 +1,6 @@
 {
     "mongo": {
-        "host": "localhost",
+        "host": "localhost:27017",
         "db": "master_cheif"
     }
 }

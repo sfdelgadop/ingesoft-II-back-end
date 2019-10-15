@@ -1,6 +1,6 @@
 'use strict'
 
-var RegionModel = require('../models/region-model'),
+var RegionModel = require('../models json/region-model'),
 	RegionController = () => {}
 
 RegionController.getAll = (req, res, next) => {

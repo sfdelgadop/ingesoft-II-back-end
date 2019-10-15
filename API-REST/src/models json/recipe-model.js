@@ -2,13 +2,15 @@
 
 var conn = require('./mongo-connect'),
 	RecipeModel = () => {}
-
+    
 RecipeModel.getAll = (cb) => {
+    //console.log("hola")
 	conn
 		.find()
 		.exec((err, docs) => {
 			if(err) throw err
-			cb(docs)
+            cb(docs)
+            //console.log("hola")
 		})
 }
 
@@ -18,7 +20,7 @@ RecipeModel.getOne = (id, cb) => {
 		.exec((err, docs) => {
 			if(err) throw err
 			cb(docs)
-		})
+        })
 }
 
 RecipeModel.save = (data, cb) => {

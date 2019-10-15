@@ -4,6 +4,7 @@ var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
 
 RecipeController.getAll = (req, res, next) => {
+	console.log("hola")
 	RecipeModel.getAll((docs) => {
 		let locals = {
 			title : 'Lista de Recetas',
