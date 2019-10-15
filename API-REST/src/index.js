@@ -6,7 +6,11 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	morgan = require('morgan'),
 	restFul = require('express-method-override')('_method'),
-	routes = require('./routes/recipe'),
+	routesRecipe = require('./routes/recipe'),
+	routesIngredient = require('./routes/ingredient'),
+	routesComments = require('./routes/comments'),
+	routesRegion = require('./routes/region'),
+	routesLikes = require('./routes/likes'),
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
@@ -26,6 +30,10 @@ app
 	.use(restFul)
 	.use( morgan('dev') )
 	.use(publicDir)
-	.use(routes)
+	.use(routesRegion)
+	.use(routesRecipe)
+	.use(routesIngredient)
+	.use(routesLikes)
+	.use(routesComments)
 
 module.exports = app
