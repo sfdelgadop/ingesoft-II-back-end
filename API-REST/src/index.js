@@ -18,7 +18,7 @@ const app = express ();
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
-	port = (process.env.PORT || 27017 || 4000)
+	port = (process.env.PORT || 3000 || 27017 || 4000)
 
 app
 	.set('port', port)
