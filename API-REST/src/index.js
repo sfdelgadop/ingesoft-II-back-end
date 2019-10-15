@@ -6,11 +6,8 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	morgan = require('morgan'),
 	restFul = require('express-method-override')('_method'),
-	routesRecipe = require('./routes/recipe'),
-	routesIngredient = require('./routes/ingredient'),
-	routesComments = require('./routes/comments'),
-	routesRegion = require('./routes/region'),
-	routesLikes = require('./routes/likes'),
+	routes = require('./routes/routes'),
+	
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
@@ -23,17 +20,19 @@ app
 	.set('port', port)
 
 	.use( favicon(faviconURL) )
+
 	// parse application/json
+	
+.use(express.urlencoded({extended:false}))
+.use(express.json())
+
 	.use( bodyParser.json() )
 	// parse application/x-www-form-urlencoded
 	.use( bodyParser.urlencoded({extended: false}) )
 	.use(restFul)
 	.use( morgan('dev') )
 	.use(publicDir)
-	.use(routesRegion)
-	.use(routesRecipe)
-	.use(routesIngredient)
-	.use(routesLikes)
-	.use(routesComments)
-
+	.use(routes)
+	
+	
 module.exports = app

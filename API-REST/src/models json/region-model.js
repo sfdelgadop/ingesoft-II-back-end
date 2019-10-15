@@ -22,12 +22,16 @@ RegionModel.getOne = (id, cb) => {
 }
 
 RegionModel.save = (data, cb) => {
+	console.log(data);
+	console.log(cb);
+	console.log("model");
+	console.log(data.id_region);
 	conn
-		.count({id_region : data.id_region})
+			.count({id_region : data.id_region})
 		.exec((err, count) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
-
+			
 			if(count == 0)
 			{
 				conn.create(data, (err) => {
