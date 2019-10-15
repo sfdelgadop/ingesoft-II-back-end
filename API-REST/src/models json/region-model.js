@@ -30,15 +30,27 @@ function saveNotification1(data) {
 }
 
 RegionModel.save = (data, cb) => {
+<<<<<<< HEAD
 	//console.log(data);
 	
 	conn
 		.count({region_id : data.region_id})
+=======
+	console.log(data);
+	console.log(cb);
+	console.log("model");
+	console.log(data.id_region);
+	conn
+			.count({id_region : data.id_region})
+>>>>>>> 5c756b77986cccdd451080fdafae387700c3175f
 		.exec((err, count) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
 			
+<<<<<<< HEAD
 			
+=======
+>>>>>>> 5c756b77986cccdd451080fdafae387700c3175f
 			if(count == 0)
 			{
 				console.log(data.region_id);

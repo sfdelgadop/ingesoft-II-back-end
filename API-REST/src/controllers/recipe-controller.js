@@ -4,14 +4,14 @@ var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
 
 RecipeController.getAll = (req, res, next) => {
-	//console.log("hola")
+	console.log("hola")
 	RecipeModel.getAll((docs) => {
 		let locals = {
 			title : 'Lista de Recetas',
 			data : docs
 		}
 
-		res.send(locals)
+		res.send( locals)
 	})
 }
 
@@ -25,7 +25,7 @@ RecipeController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.send(locals)
+		res.send( locals)
 	})
 }
 
@@ -42,7 +42,7 @@ RecipeController.save = (req, res, next) => {
 
 	console.log(recipe)
 
-	RecipeModel.save( recipe, () => res.redirect('/') )
+	RecipeModel.save( recipe, () => res.redirect('/ver-recipe') )
 }
 
 RecipeController.delete = (req, res, next) => {
@@ -55,8 +55,6 @@ RecipeController.delete = (req, res, next) => {
 RecipeController.addForm = (req, res, next) => res.send('add-recipe', { title : 'Agregar Receta' })
 
 RecipeController.error404 = (req, res, next) => {
-	//console.log(req);
-	
 	let error = new Error(),
 		locals = {
 			title : 'Error 404',
@@ -66,7 +64,7 @@ RecipeController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.send(locals)
+	res.send( locals)
 
 	next()
 }

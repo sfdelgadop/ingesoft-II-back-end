@@ -23,6 +23,8 @@ IngredientModel.getOne = (id, cb) => {
 }
 
 IngredientModel.save = (data, cb) => {
+	console.log("modelo")
+	console.log(data)
 	conn
 		.count({ingredient_id : data.ingredient_id})
 		.exec((err, count) => {
@@ -42,9 +44,9 @@ IngredientModel.save = (data, cb) => {
 					{ingredient_id : data.ingredient_id},
 					{
                     name : data.name,
-                    clasification : data.clasification,
+                    classification : data.classification,
                     region : data.region,
-                    prioridad : data.prioridad
+                    priority : data.priority
 						
 					},
 					(err) => {

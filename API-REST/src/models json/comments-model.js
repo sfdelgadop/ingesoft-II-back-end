@@ -27,7 +27,7 @@ CommentsModel.save = (data, cb) => {
 		.exec((err, count) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
-
+			console.log(data.comment_id)
 			if(count == 0)
 			{
 				conn.create(data, (err) => {

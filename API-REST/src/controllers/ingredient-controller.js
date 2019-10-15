@@ -39,7 +39,7 @@ IngredientController.save = (req, res, next) => {
 
 	console.log(ingredient)
 
-	IngredientModel.save( ingredient, () => res.redirect('/') )
+	IngredientModel.save( ingredient, () => res.redirect('/ver-ingredient') )
 }
 
 IngredientController.delete = (req, res, next) => {

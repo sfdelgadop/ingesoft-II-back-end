@@ -10,7 +10,7 @@ LikesController.getAll = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('index', locals)
+		res.send( locals)
 	})
 }
 
@@ -37,7 +37,7 @@ LikesController.save = (req, res, next) => {
 
 	console.log(like)
 
-	LikesModel.save( like, () => res.redirect('/') )
+	LikesModel.save( like, () => res.redirect('/ver-likes') )
 }
 
 LikesController.delete = (req, res, next) => {

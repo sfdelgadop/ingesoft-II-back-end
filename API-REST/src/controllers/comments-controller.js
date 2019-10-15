@@ -39,7 +39,7 @@ CommentsController.save = (req, res, next) => {
 
 	console.log(comment)
 
-	CommentsModel.save( comment, () => res.redirect('/') )
+	CommentsModel.save( comment, () => res.redirect('/ver-comments') )
 }
 
 CommentsController.delete = (req, res, next) => {
