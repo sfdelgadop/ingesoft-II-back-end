@@ -62,7 +62,7 @@ var mongoose = require('mongoose'),
     mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`)
 
     module.exports = RecipeModel
-    module.exports = IngredientModel
+    /*module.exports = IngredientModel
     module.exports = CommentsModel
     module.exports = LikesModel
-    module.exports = RegionModel
+    module.exports = RegionModel*/

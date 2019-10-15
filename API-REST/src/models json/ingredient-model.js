@@ -1,6 +1,6 @@
 'use strict'
 
-var conn = require('./mongo-connect'),
+var conn = require('./recipe-connect'),
 	IngredientModel = () => {}
 
     IngredientModel.getAll = (cb) => {

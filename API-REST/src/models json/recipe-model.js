@@ -10,7 +10,7 @@ RecipeModel.getAll = (cb) => {
 		.exec((err, docs) => {
 			if(err) throw err
             cb(docs)
-            //console.log(docs)
+            console.log(docs)
 		})
 }
 
