@@ -15,7 +15,7 @@ var mongoose = require('mongoose'),
     },
     {
         collection : "comments"
-    })
+    }),
     CommentsModel = mongoose.model("Comments", CommentsSchema)
     
     mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`)

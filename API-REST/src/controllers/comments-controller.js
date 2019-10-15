@@ -10,7 +10,7 @@ CommentsController.getAll = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('index', locals)
+		res.send(locals)
 	})
 }
 
@@ -24,7 +24,7 @@ CommentsController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('edit-comments', locals)
+		res.send(locals)
 	})
 }
 
@@ -61,7 +61,7 @@ CommentsController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.render('error', locals)
+	res.send(locals)
 
 	next()
 }

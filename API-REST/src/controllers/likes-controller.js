@@ -24,7 +24,7 @@ LikesController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('edit-likes', locals)
+		res.send(locals)
 	})
 }
 
@@ -59,7 +59,7 @@ LikesController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.render('error', locals)
+	res.send(locals)
 
 	next()
 }

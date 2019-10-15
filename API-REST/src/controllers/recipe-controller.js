@@ -11,7 +11,7 @@ RecipeController.getAll = (req, res, next) => {
 			data : docs
 		}
 
-		//res.render('index', locals)
+		res.send(locals)
 	})
 }
 
@@ -25,7 +25,7 @@ RecipeController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		//res.render('edit-recipe', locals)
+		res.send(locals)
 	})
 }
 
@@ -52,9 +52,11 @@ RecipeController.delete = (req, res, next) => {
 	RecipeModel.delete( recipe_id, () => res.redirect('/') )
 }
 
-RecipeController.addForm = (req, res, next) => res.render('add-recipe', { title : 'Agregar Receta' })
+RecipeController.addForm = (req, res, next) => res.send('add-recipe', { title : 'Agregar Receta' })
 
 RecipeController.error404 = (req, res, next) => {
+	//console.log(req);
+	
 	let error = new Error(),
 		locals = {
 			title : 'Error 404',
@@ -64,7 +66,7 @@ RecipeController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	//res.render('error', locals)
+	res.send(locals)
 
 	next()
 }
