@@ -1,3 +1,21 @@
+'use strict'
+
+var RecipeController = require('../controllers/Recipe-controller'),
+	express = require('express'),
+	router = express.Router()
+
+router
+	.get('/', RecipeController.getAll)
+	.get('/agregar', RecipeController.addForm)
+	.post('/', RecipeController.save)
+	.get('/editar/:Recipe_id', RecipeController.getOne)
+	.put('/actualizar/:Recipe_id', RecipeController.save)
+	.delete('/eliminar/:Recipe_id', RecipeController.delete)
+	.use(RecipeController.error404)
+	
+module.exports = router
+
+
 const {Router} = require('express');
 const router = Router();
 const _= require('underscore');

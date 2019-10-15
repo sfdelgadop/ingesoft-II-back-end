@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "nodemon src/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "MongoDB"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.7.4",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "underscore": "^1.9.1"
