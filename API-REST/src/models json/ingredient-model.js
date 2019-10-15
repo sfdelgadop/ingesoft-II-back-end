@@ -1,6 +1,7 @@
 'use strict'
 
-var conn = require('./recipe-connect'),
+
+var conn = require('./ingredient-connect'),
 	IngredientModel = () => {}
 
     IngredientModel.getAll = (cb) => {
