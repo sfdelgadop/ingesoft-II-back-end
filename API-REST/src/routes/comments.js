@@ -1,7 +1,7 @@
 'use strict'
 
 var 
-CommentsController = require('../controllers/comments-controller')
+CommentsController = require('../controllers/comments-controller'),
 
 	express = require('express'),
 	router = express.Router()

@@ -1,6 +1,6 @@
 'use strict'
 
-var RecipeController = require('../controllers/recipe-controller')
+var RecipeController = require('../controllers/recipe-controller'),
 
 	express = require('express'),
 	router = express.Router()

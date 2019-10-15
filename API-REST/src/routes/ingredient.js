@@ -1,6 +1,6 @@
 'use strict'
 
-var IngredientController = require('../controllers/ingredient-controller')
+var IngredientController = require('../controllers/ingredient-controller'),
 
 	express = require('express'),
 	router = express.Router()

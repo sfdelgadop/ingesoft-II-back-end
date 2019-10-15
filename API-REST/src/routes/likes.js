@@ -1,6 +1,6 @@
 'use strict'
 
-var LikesController = require('../controllers/likes-controller')
+var LikesController = require('../controllers/likes-controller'),
 
 
 	express = require('express'),

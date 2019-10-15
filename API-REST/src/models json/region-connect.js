@@ -5,8 +5,12 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
     RegionSchema = new Schema({
-        id_region : Number,
-        name_region : String 
+        "id_region" : {
+            type: Number
+        },
+        "name_region" : {
+            type: String 
+        }
     },
     {
         collection : "region"

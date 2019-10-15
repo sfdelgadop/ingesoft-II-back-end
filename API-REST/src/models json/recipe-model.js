@@ -33,7 +33,7 @@ RecipeModel.save = (data, cb) => {
 
 			if(count == 0)
 			{
-				conn.create(data, (err) => {
+				conn.insert(data, (err) => {
 					if(err) throw err
 					cb()
 				})

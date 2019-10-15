@@ -17,7 +17,7 @@ RegionController.getAll = (req, res, next) => {
 
 RegionController.getOne = (req, res, next) => {
 	let region_id = req.params.region_id
-	console.log(region_id)
+	//console.log(region_id)
 
 	RegionModel.getOne(region_id, (docs) => {
 		let locals = {
@@ -30,14 +30,16 @@ RegionController.getOne = (req, res, next) => {
 }
 
 RegionController.save = (req, res, next) => {
+	console.log(res);
+	
 	let region = {
 		region_id : req.body.region_id,
 		name_region : req.body.name_region
 	}
 
-	console.log(res)
+	console.log(region)
 
-	RegionModel.save( region, () => res.redirect('/') )
+	RegionModel.save( region, () => res.redirect('/ver-region') )
 }
 
 RegionController.delete = (req, res, next) => {
@@ -47,7 +49,7 @@ RegionController.delete = (req, res, next) => {
 	RegionModel.delete( region_id, () => res.redirect('/') )
 }
 
-RegionController.addForm = (req, res, next) => res.render('add-region', { title : 'Agregar Region' })
+RegionController.addForm = (req, res, next) => res.send('add-region', { title : 'Agregar Region' })
 
 RegionController.error404 = (req, res, next) => {
 	let error = new Error(),
