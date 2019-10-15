@@ -54,7 +54,7 @@ var mongoose = require('mongoose'),
     }),
     
     RecipeModel = mongoose.model("Recipe", RecipeSchema),
-    ingredientModel = mongoose.model("Ingredient", IngredientSchema),
+    IngredientModel = mongoose.model("Ingredient", IngredientSchema),
     CommentsModel = mongoose.model("Comments", CommentsSchema),
     LikesModel = mongoose.model("Likes", LikesSchema),
     RegionModel = mongoose.model("Region", RegionSchema)
@@ -62,4 +62,7 @@ var mongoose = require('mongoose'),
     mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`)
 
     module.exports = RecipeModel
-    
+    module.exports = IngredientModel
+    module.exports = CommentsModel
+    module.exports = LikesModel
+    module.exports = RegionModel

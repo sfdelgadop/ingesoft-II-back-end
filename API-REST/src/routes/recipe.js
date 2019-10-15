@@ -1,76 +1,50 @@
 'use strict'
 
-var RecipeController = require('../controllers/Recipe-controller'),
+var RecipeController = require('../controllers/recipe-controller'),
 	express = require('express'),
 	router = express.Router()
 
 router
-	.get('/', RecipeController.getAll)
-	.get('/agregar', RecipeController.addForm)
-	.post('/', RecipeController.save)
-	.get('/editar/:Recipe_id', RecipeController.getOne)
-	.put('/actualizar/:Recipe_id', RecipeController.save)
-	.delete('/eliminar/:Recipe_id', RecipeController.delete)
-	.use(RecipeController.error404)
+    .get('/', RecipeController.getAll)
+    .get('/agregar', RecipeController.addForm)
+    .post('/', RecipeController.save)
+    .get('/editar/:recipe_id', RecipeController.getOne)
+    .put('/actualizar/:recipe_id', RecipeController.save)
+    .delete('/eliminar/:recipe_id', RecipeController.delete)
+    .use(RecipeController.error404)
+
+    .get('/', CommentsController.getAll)
+    .get('/agregar', CommentsController.addForm)
+    .post('/', CommentsController.save)
+    .get('/editar/:comment_id', CommentsController.getOne)
+    .put('/actualizar/:comment_id', CommentsController.save)
+    .delete('/eliminar/:comment_id', CommentsController.delete)
+    .use(CommentsController.error404)
+
+    .get('/', IngredientController.getAll)
+    .get('/agregar', IngredientController.addForm)
+    .post('/', IngredientController.save)
+    .get('/editar/:ingredient_id', IngredientController.getOne)
+    .put('/actualizar/:ingredient_id', IngredientController.save)
+    .delete('/eliminar/:ingredient_id', IngredientController.delete)
+    .use(IngredientController.error404)
+
+    .get('/', LikesController.getAll)
+    .get('/agregar', LikesController.addForm)
+    .post('/', LikesController.save)
+    .get('/editar/:like_id', LikesController.getOne)
+    .put('/actualizar/:like_id', LikesController.save)
+    .delete('/eliminar/:like_id', LikesController.delete)
+    .use(LikesController.error404)
+
+    .get('/', RegionController.getAll)
+    .get('/agregar', RegionController.addForm)
+    .post('/', RegionController.save)
+    .get('/editar/:region_id', RegionController.getOne)
+    .put('/actualizar/:region_id', RegionController.save)
+    .delete('/eliminar/:region_id', RegionController.delete)
+    .use(RegionController.error404)
+
+
 	
 module.exports = router
-
-
-const {Router} = require('express');
-const router = Router();
-const _= require('underscore');
- 
-const recipes = require('../models json/recipe.json');
-console.log(recipes);
-
-// routes
-router.get('/',(req,res)=>{
-    res.json(recipes);
-});
-
-router.post('/',(req,res)=>{
-    
-    const { id_recipe,name_recipe, type_recipe, details, likes, creator } = req.body; //const apartes almacena
-    const newRecipe = { ...req.body }; //... 3 puntos para traer todos los datos
-    if (id_recipe && name_recipe && type_recipe && details &&  likes && creator ) {
-        recipes.push(newRecipe);
-        res.json(recipes);
-    } else {
-        res.status(500).json({error: 'There was an error.'});
-    }
-});
-
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const {id_recipe,name_recipe, type_recipe, details, likes, creator } = req.body;//ATRIBUTOS
-    if (id_recipe && name_recipe && type_recipe && details &&  likes && creator ) {
-        _.each(recipes, (recipe, i) => {
-            if (recipe.id_recipe === id) {
-                recipe.name_recipe =name_recipe;
-                recipe.type_recipe = type_recipe;
-                recipe.details = details;
-                recipe.likes = likes;
-                recipe.creator = creator;
-            }
-        });
-        res.json(recipes);
-    } else {
-        res.status(500).json({error: 'There was an error.'});
-    }
-});
-
-
-router.delete('/:id', (req, res) => {
-    const {id} = req.params;
-    if (id) {
-        _.each(recipes, (recipe, i) => {
-            if (recipe.id_recipe == id) {
-                recipes.splice(i, 1);
-            }
-        });
-        res.json(recipes);
-    }
-});
-
-
-module.exports=router;

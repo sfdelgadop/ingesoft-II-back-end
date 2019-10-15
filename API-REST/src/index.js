@@ -1,28 +1,31 @@
+
 'use strict'
 
-const express =require('express');
-const app = express ();
-const morgan = require('morgan');
-routes = require('./routes/recipe');
-//settings
- 
-app.set('port',process.env.PORT || 3000);
+var express = require('express'),
+	favicon = require('serve-favicon'),
+	bodyParser = require('body-parser'),
+	morgan = require('morgan'),
+	restFul = require('express-method-override')('_method'),
+	routes = require('./routes/recipe'),
+	//faviconURL = `${__dirname}/public/img/node-favicon.png`,
+	publicDir = express.static(`${__dirname}/public`),
+	viewDir = `${__dirname}/views`,
+	port = (process.env.PORT || 3000),
+	app = express()
 
+app
+	.set('views', viewDir)
+	.set('view engine', 'jade')
+	.set('port', port)
 
+	.use( favicon(faviconURL) )
+	// parse application/json
+	.use( bodyParser.json() )
+	// parse application/x-www-form-urlencoded
+	.use( bodyParser.urlencoded({extended: false}) )
+	.use(restFul)
+	.use( morgan('dev') )
+	.use(publicDir)
+	.use(routes)
 
-//middlewares-procesa datos antes de recibirlos
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended:false}));
-app.use(express.json());
-
-// routers
-
-app.use('/api/user',require('./routes/user'));
-app.use('/api/region',require('./routes/region'));
-app.use('/api/recipe',require('./routes/recipe'));
-app.use('/api/ingredient',require('./routes/ingredient'));
-
-//starting the server
-app.listen(app.get('port'),() =>{
-     console.log(`server on port ${app.get('port')}`);
-});
+module.exports = app
