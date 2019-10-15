@@ -1,0 +1,18 @@
+use master_cheif
+
+db.recipe
+db.ingredient
+db.likes
+db.comments
+db.region
+
+db.recipe.insert({"recipe_id": 0,"name": "Arroz con huevo","user_id": 0,"ingredients":{},"procedure": {},"photos": {},"created_at": Date(),"region": "Colombia"})
+
+db.ingredient.insert({"ingredient_id": 0,"name": "Arroz","clasification": "Grano","region": "Todas","priority": 1})
+db.ingredient.insert({"ingredient_id": 1,"name": "Huevo","classification": "Proteina","region": "Todas","priority": 2})
+
+db.likes.insert({"like_id": 0,"recipe_id": 0,"user_id": 0})
+
+db.comments.insert({"comment_id": 0,"user_id": 1,"recipe_id": 0,"text": "comentario prueba","created_at": Date()})
+
+db.region.insert({"region_id": 0,"name_region":"Colombia"})

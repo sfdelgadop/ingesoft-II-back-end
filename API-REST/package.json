@@ -2,14 +2,17 @@
   "name": "API-REST",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor src/server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "MongoDB"
+  ],
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
   "devDependencies": {
     "nodemon": "^1.19.3"
   },
@@ -26,16 +29,11 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "underscore": "^1.9.1",
-    "validator": "^11.1.0"
-=======
-  "dependencies": {
-    "express": "^4.17.1",
-    "morgan": "^1.9.1",
-    "node-fetch": "^2.6.0",
-    "underscore": "^1.9.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.2"
->>>>>>> 01c1d05c2de7d3ec3523b9bcba34fb4c50afbc5c
+    "validator": "^11.1.0",
+    "express-method-override": "0.0.3",
+    "jade": "^1.11.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.7.5",
+    "serve-favicon": "^2.5.0"
   }
 }

@@ -1,55 +1,20 @@
-const {Router} = require('express');
-const router = Router();
-const _= require('underscore');
- 
-const regions = require('../models json/region.json');
-console.log(regions);
+'use strict'
 
-// routes
-router.get('/',(req,res)=>{
-    res.json(regions);
-});
+var RegionController = require('../controllers/region-controller'),
 
-router.post('/',(req,res)=>{
+	express = require('express'),
+	router = express.Router()
     
-    const { id_region, name_region } = req.body; //const apartes almacena
-    const newRegion = { ...req.body }; //... 3 puntos para traer todos los datos
-    if (id_region && name_region) {
-        regions.push(newRegion);
-        res.json(regions);
-    } else {
-        res.status(500).json({error: 'There was an error.'});
-    }
-});
-
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const {id_region, name_region } = req.body;//ATRIBUTOS
-    if (id_region && name_region ) {
-        _.each(regions, (region, i) => {
-            if (region.id_region === id) {
-                region.name_region =name_region;
-                
-            }
-        });
-        res.json(regions);
-    } else {
-        res.status(500).json({error: 'There was an error.'});
-    }
-});
+router
+ 
+    .get('/ver-region', RegionController.getAll)
+    .get('/agregar-region', RegionController.addForm)
+    .post('/crear-region', RegionController.save)
+    .get('/editar-region/:region_id', RegionController.getOne)
+    .put('/actualizar-region/:region_id', RegionController.save)
+    .delete('/eliminar-region/:region_id', RegionController.delete)
+    .use(RegionController.error404)
 
 
-router.delete('/:id', (req, res) => {
-    const {id} = req.params;
-    if (id) {
-        _.each(regions, (region, i) => {
-            if (region.id_region == id) {
-                regions.splice(i, 1);
-            }
-        });
-        res.json(regions);
-    }
-});
-
-
-module.exports=router;
+	
+module.exports = router
