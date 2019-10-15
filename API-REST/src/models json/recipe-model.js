@@ -1,6 +1,6 @@
 'use strict'
 
-var conn = require('./mongo-connect'),
+var conn = require('./recipe-connect'),
 	RecipeModel = () => {}
     
 RecipeModel.getAll = (cb) => {
@@ -10,7 +10,7 @@ RecipeModel.getAll = (cb) => {
 		.exec((err, docs) => {
 			if(err) throw err
             cb(docs)
-            //console.log(docs)
+            console.log(docs)
 		})
 }
 

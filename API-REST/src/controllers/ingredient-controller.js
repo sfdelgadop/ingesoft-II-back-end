@@ -10,7 +10,7 @@ IngredientController.getAll = (req, res, next) => {
             data : docs   
 		}
 
-		res.render('index', locals)
+		res.send(locals)
 	})
 }
 
@@ -24,7 +24,7 @@ IngredientController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('edit-ingredient', locals)
+		res.send(locals)
 	})
 }
 
@@ -61,7 +61,7 @@ IngredientController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.render('error', locals)
+	res.send(locals)
 
 	next()
 }

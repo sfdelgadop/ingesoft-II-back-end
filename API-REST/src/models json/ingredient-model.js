@@ -1,5 +1,6 @@
 'use strict'
 
+
 var conn = require('./ingredient-connect'),
 	IngredientModel = () => {}
 

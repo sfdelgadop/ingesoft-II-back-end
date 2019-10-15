@@ -9,8 +9,9 @@ RegionController.getAll = (req, res, next) => {
 			title : 'Lista de regiones',
 			data : docs
 		}
-
-		res.render('index', locals)
+		console.log("hola");
+		
+		res.send(locals)
 	})
 }
 
@@ -24,7 +25,7 @@ RegionController.getOne = (req, res, next) => {
 			data : docs
 		}
 
-		res.render('edit-region', locals)
+		res.send(locals)
 	})
 }
 
@@ -34,7 +35,7 @@ RegionController.save = (req, res, next) => {
 		name_region : req.body.name_region
 	}
 
-	console.log(region)
+	console.log(res)
 
 	RegionModel.save( region, () => res.redirect('/') )
 }
@@ -58,7 +59,7 @@ RegionController.error404 = (req, res, next) => {
 
 	error.status = 404
 
-	res.render('error', locals)
+	res.send(locals)
 
 	next()
 }
