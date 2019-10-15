@@ -1,5 +1,3 @@
-
-
 'use strict'
 
 const express =require('express');
@@ -9,25 +7,20 @@ const morgan = require('morgan');
 const app = express ();
 //settings
  
-app.set('port',process.env.PORT || 4000 || 3000);
+//app.set('port',process.env.PORT || 4000)
 
 
-var express = require('express'),
-	favicon = require('serve-favicon'),
+	var favicon = require('serve-favicon'),
 	bodyParser = require('body-parser'),
-	morgan = require('morgan'),
 	restFul = require('express-method-override')('_method'),
 	routes = require('./routes/routes'),
 	
 	faviconURL = `${__dirname}/public/img/node-favicon.png`,
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
-	port = (process.env.PORT || 3000 || 27017),
-	app = express()
+	port = (process.env.PORT || 27017 || 4000)
 
 app
-	.set('views', viewDir)
-	.set('view engine', 'jade')
 	.set('port', port)
 
 	.use( favicon(faviconURL) )
