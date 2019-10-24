@@ -11,7 +11,7 @@ RecipeController.getAll = (req, res, next) => {
 			data : docs
 		}
 
-		res.send( locals)
+		res.send( docs)
 	})
 }
 

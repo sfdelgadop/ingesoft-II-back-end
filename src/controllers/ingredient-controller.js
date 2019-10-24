@@ -1,6 +1,6 @@
 'use strict'
 
-var IngredientModel = require('../models json/Ingredient-model'),
+var IngredientModel = require('../models json/ingredient-model'),
 	IngredientController = () => {}
 
 IngredientController.getAll = (req, res, next) => {

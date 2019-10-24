@@ -40,6 +40,20 @@ router.post('/users', (req, res) => {
 
 });
 
+router.post('/login',(req,res) => {
+  const {username,password} = req.body;
+    mysqlConnection.query('SELECT * FROM Users WHERE username = ? AND password = ?',
+      [username,password],
+      (err,rows,fields)=>{
+        if(!err){
+          res.json({status:'done'});
+        }else{
+          console.log(err);
+        }
+      }
+    )
+});
+
 //PUT User  
 
 router.put('/users', (req, res) => {

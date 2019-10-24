@@ -10,7 +10,7 @@ CommentsController.getAll = (req, res, next) => {
 			data : docs
 		}
 
-		res.send(locals)
+		res.send(docs)
 	})
 }
 
@@ -30,11 +30,11 @@ CommentsController.getOne = (req, res, next) => {
 
 CommentsController.save = (req, res, next) => {
 	let comment = {
-		comment_id : req.body.comment_id,
-        user_id : req.body.user_id,
-        recipe_id : req.body.recipe_id,
-		text : req.body.text,
-		created_at : req.body.created_at
+        dishId : req.body.dishId,
+        rating : req.body.rating,
+		author : req.body.author,
+		comment : req.body.comment,
+		date : req.body.date
 	}
 
 	console.log(comment)

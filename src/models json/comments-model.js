@@ -23,33 +23,17 @@ CommentsModel.getOne = (id, cb) => {
 
 CommentsModel.save = (data, cb) => {
 	conn
-		.count({comment_id : data.comment_id})
+		.count({dishId : data.dishId})
 		.exec((err, count) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
 			console.log(data.comment_id)
-			if(count == 0)
+			if(count != -1)
 			{
 				conn.create(data, (err) => {
 					if(err) throw err
 					cb()
 				})
-			}
-			else if(count == 1)
-			{
-				conn.findOneAndUpdate(
-					{comment_id : data.comment_id},
-					{
-                        user_id : data.user_id,
-                        recipe_id : data.recipe_id,
-                        text : data.text,
-                        created_at : data.created_at
-					},
-					(err) => {
-						if(err) throw(err)
-						cb()
-					}
-				)
 			}
 		})
 }

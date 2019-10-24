@@ -4,14 +4,12 @@ var mongoose = require('mongoose'),
     conf = require('./db-conf'),
     Schema = mongoose.Schema,
 
-  
-
-    CommentsSchema = new Schema({
-        comment_id : Number,
-        recipe_id: {type: Schema.ObjectId, ref: "Recipe"},
-        user_id: Number,
-        text: String,
-        created_at: Date,
+      CommentsSchema = new Schema({
+        dishId: Number,
+        rating : String,
+        author: String,
+        comment: String,
+        date: Date,
     },
     {
         collection : "comments"

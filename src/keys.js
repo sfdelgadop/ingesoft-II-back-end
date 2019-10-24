@@ -1,8 +1,8 @@
 module.exports = {
   database: {
     host: 'localhost',
-    user: 'root',
-    password: 'admin',
+    user: 'sebas',
+    password: '1234',
     database: 'relational_db'
   }
 };
