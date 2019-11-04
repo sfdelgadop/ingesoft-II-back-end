@@ -55,9 +55,6 @@ app.use(require('./routes/followers'));
 // routers
 
 app.use('/api/user', require('./routes/user'));
-app.use('/api/region', require('./routes/region'));
-app.use('/api/recipe', require('./routes/recipe'));
-app.use('/api/ingredient', require('./routes/ingredient'));
 
 //starting the server
 app.listen(app.get('port'), () => {
