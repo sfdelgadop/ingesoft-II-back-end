@@ -28,16 +28,3 @@ pool.query = promisify(pool.query);
 
 module.exports =pool;
 
-
-/*const mysqlConnection = mysql.createConnection(database);;//recibe objeto de configuracion de la base de datos
-
-mysqlConnection.connect(function(err){
-  if (err) {
-    console.log(err);
-    return;
-
-}else{
-  console.log('DB is connected');
-}
-});*/
-// pool querys callbacks convertidas a promesas
