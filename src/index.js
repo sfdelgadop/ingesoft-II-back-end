@@ -49,12 +49,13 @@ module.exports = app
 app.use('/api/region',require('./routes/region'));
 app.use('/api/recipe',require('./routes/recipe'));
 app.use('/api/ingredient',require('./routes/ingredient'));*/
-app.use(require('./routes/user'));
-app.use(require('./routes/rol'));
-app.use(require('./routes/followers'));
+//app.use(require('./routes/user'));
+//app.use(require('./routes/rol'));
+//app.use(require('./routes/followers'));
 // routers
 
 app.use('/api/user', require('./routes/user'));
+
 
 //starting the server
 app.listen(app.get('port'), () => {
