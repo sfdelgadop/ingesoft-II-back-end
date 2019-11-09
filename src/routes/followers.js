@@ -3,6 +3,7 @@ const router = Router();
 const mysqlConnection = require('../database');
 
 // GET all Users
+// muestra todos los seguidores 
 router.get('/follows', (req, res) => {
     mysqlConnection.query('SELECT * FROM Follows', (err, rows, fields) => {
       if(err) {
@@ -14,6 +15,7 @@ router.get('/follows', (req, res) => {
   });
 
 // GET any rol
+//muestra algun usuario en particular
 router.get('/follows:id', (req, res) => {
   const { id } = req.params; 
   mysqlConnection.query('SELECT * FROM Rol WHERE id_following = ?', [id], (err, rows, fields) => {
