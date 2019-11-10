@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 const mysqlConnection = require('../database');
-
+const helper = require('../lib/helpers');
 // GET all Users
 //optiene todos los usuarios
 router.get('/users', async (_req, res) => {
@@ -30,9 +30,11 @@ router.get('/users/:id', (req, res) => {
 
 //POST User 
 //crea un usuario en la base de datos
-router.post('/users', (req, res) => {
+router.post('/users', async(req, res) => {
+  //guarda en un json los datos recibidos para la base de datos
   const {firstName, lastName, username, email, password, age, gender} = req.body;
-  mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);',[password, firstName, lastName, username, email,age, gender], 
+  const encrypted=await helper.encryptPassword(password);//guarda contraseña recibida del formulario web
+  await mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);',[encrypted,firstName, lastName, username, email,age,gender], 
   (err, rows, fields) => {
       if (!err) {
         res.json({status: 'done'});

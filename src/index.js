@@ -54,7 +54,7 @@ app.use('/api/ingredient',require('./routes/ingredient'));*/
 //app.use(require('./routes/followers'));
 // routers
 
-app.use('/api/user', require('./routes/user'));
+app.use('/api', require('./routes/user'));
 
 
 //starting the server
