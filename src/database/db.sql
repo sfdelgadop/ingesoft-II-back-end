@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Users(
     password VARCHAR (64) NOT NULL,
     name_user VARCHAR (64) NOT NULL,
     last_name VARCHAR (64) NOT NULL,
-    username VARCHAR (64) NOT NULL,
+    username VARCHAR (64) NOT NULL UNIQUE KEY,
     email VARCHAR (64) NOT NULL UNIQUE KEY,
     id_rolf INT(16),
     CONSTRAINT fk_user FOREIGN KEY (id_rolf) REFERENCES Rol(id_rol),
