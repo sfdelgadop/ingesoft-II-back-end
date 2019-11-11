@@ -9,13 +9,8 @@ helpers.encryptPassword = async(password) => {
 };
 
 //compara contraseña del login con la cadena guardada en la base de datos
-helpers.matchPassword = async(password,dbPassword ) =>{
-    try{
-        await bcrypt.compare(password,dbPassword);//método de comparación
-    }catch(e){
-        console.log(e);
-    }
-    
-};
-
+helpers.matchPassword = async(refpassword,dbPassword)=>{
+      const result = await bcrypt.compareSync(refpassword, dbPassword);//
+      return result;  
+}
 module.exports = helpers;
