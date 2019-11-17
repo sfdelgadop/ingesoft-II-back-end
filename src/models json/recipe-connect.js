@@ -8,9 +8,10 @@ var mongoose = require('mongoose'),
         id: Number,
         name: String,
         user_id: Number,
-        image: String,
+        photos: String,
         ingredients: {},
         procedure: {},
+        description: String,
         created_at: Date
 
     },
