@@ -2,7 +2,8 @@ const {Router} = require('express');
 const router = Router();
 const mysqlConnection = require('../database');
 var nodemailer = require('nodemailer');
-// email sender function
+
+/*// email sender function
 exports.sendEmail = function(req, res){
 // Definimos el transporter
     var transporter = nodemailer.createTransport({
@@ -29,7 +30,7 @@ transporter.sendMail(mailOptions, function(error, info){
         res.status(200).jsonp(req.body);
     }
 });
-};
+};*/
 
 var ObserverDP = () => {}
 
