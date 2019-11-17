@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
         ingredient_id: Number,
         name:String,
         classification: String,
-        region_id: {type: Schema.ObjectId, ref: "Region"},
+        region_id: String,
         priority: Number
     },
     {

@@ -1,5 +1,7 @@
 'use strict'
 
+var search = require('./search_ingredient');
+
 var IngredientModel = require('../models json/ingredient-model'),
 	IngredientController = () => {}
 
@@ -16,7 +18,7 @@ IngredientController.getAll = (req, res, next) => {
 
 IngredientController.getOne = (req, res, next) => {
 	let ingredient_id = req.params.ingredient_id
-	console.log(ingredient_id)
+	//console.log(ingredient_id)
 
 	IngredientModel.getOne(ingredient_id, (docs) => {
 		let locals = {
@@ -30,7 +32,7 @@ IngredientController.getOne = (req, res, next) => {
 
 IngredientController.save = (req, res, next) => {
 	let ingredient = {
-		ingredient_id : req.body.ingredient_id,
+		ingredient_id : search.hashcode(req.body.name),
 		name : req.body.name,
 		classification : req.body.classification,
 		region : req.body.region,
