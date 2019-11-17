@@ -3,69 +3,55 @@ const router = Router();
 const mysqlConnection = require('../database');
 var nodemailer = require('nodemailer');
 
-/*// email sender function
-exports.sendEmail = function(req, res){
-// Definimos el transporter
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'example@gmail.com',
-            pass: 'password'
-        }
-    });
-// Definimos el email
-var mailOptions = {
-    from: 'Remitente',
-    to: 'destinatario@gmail.com',
-    subject: 'Asunto',
-    text: 'Contenido del email'
-};
-// Enviamos el email
-transporter.sendMail(mailOptions, function(error, info){
-    if (error){
-        console.log(error);
-        res.send(500, err.message);
-    } else {
-        console.log("Email sent");
-        res.status(200).jsonp(req.body);
-    }
-});
-};*/
-
 var ObserverDP = () => {}
 
+//obtiene todos los usuarios y guarda sus correos en un arreglo
+ObserverDP.getAll = async function(name_recipe){
 
-// GET all Users
-//optiene todos los usuarios
-ObserverDP.getAll = async () => {
-    console.log("hola");
+    var query = await mysqlConnection.query('SELECT * FROM Users');
+    var us= {};
+    var mails = "'";
+    for(i in query){
+        us[i]= JSON.parse(JSON.stringify(query[i]));
         
-    mysqlConnection.query('SELECT * FROM Users', (err, rows, fields) => {
-    if(err) {
-      console.log(err);
-    } else {
-      res.json(rows);
     }
-  });
-  console.log(res);
+    //console.log(us[0]['user_id']);
+    //console.log( us.size());
+    
+    for(var i = 0, s = Object.keys(us).length; i < s; i++){
 
+        us[i]=us[i]['email'];
+        if(i<s-1){
+            mails+=us[i]+", ";
+        }else{
+            mails+=us[i];
+        }
+    }
+    mails+="'";
+    //console.log(mails);
+    //Llama a la función que envia los correos recibiendo un arreglo de correos y el nombre de la receta
+    ObserverDP.sendMails(mails,name_recipe);
+    
 }
       
-ObserverDP.sendMails = function(req, res){
+ObserverDP.sendMails = function(mails,name_recipe){
+    
+    //console.log(mails);
     // Definimos el transporter
         var transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: 'kyocerascanner@gmail.com',
+                user: 'kyocerascannerunid@gmail.com',
                 pass: 'Adminfc2020'
             }
         });
     // Definimos el email
+    
     var mailOptions = {
         from: 'Remitente',
-        to: 'destinatario@gmail.com',
-        subject: 'Asunto',
-        text: 'Contenido del email'
+        to: mails,
+        subject: 'Nueva receta posteada, ven a descubrir nuevos sabores',
+        text: `Hola te informamos que una nueva receta llamada ${name_recipe} ha sido subida y ya está disponible para que la descubras \nAtt: El equipo de Master cheif`
     };
     // Enviamos el email
     transporter.sendMail(mailOptions, function(error, info){

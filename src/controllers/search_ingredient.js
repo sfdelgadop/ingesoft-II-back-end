@@ -2,7 +2,7 @@
 const prime=1009;
 
 var SearchModel = () => {}
-
+//Obtiene el valor hash de una receta
 SearchModel.hashRecipe = function(ingredientes){
     var hash = 0;
     for(var i in ingredientes){
@@ -12,12 +12,9 @@ SearchModel.hashRecipe = function(ingredientes){
     
     return hash;
 }
-
+//Obtiene el valor hash de un ingrediente
 SearchModel.hashcode = function(nombre_ingrediente){
     var hash = 0;
-    //console.log(nombre_ingrediente[0]);
-    //console.log(nombre_ingrediente.charCodeAt(0));
-    
     for(var i=0; i < nombre_ingrediente.length; i++){
         /*if(nombre_ingrediente.charCodeAt(i)>=65 && nombre_ingrediente.charCodeAt(i)<=90){
             nombre_ingrediente[i]= String.fromCharCode(nombre_ingrediente.charCodeAt(i)+32);
@@ -32,7 +29,7 @@ SearchModel.hashcode = function(nombre_ingrediente){
     
     return hash%prime;
 }
-
+//Obtiene todos las combinaciones posibles de ingredientes
 SearchModel.getPosibilities = function(ingredientes,unique){
     unique = typeof unique === 'undefined' ? false : unique;
     var len = ingredientes.length + 1;
@@ -112,15 +109,4 @@ SearchModel.getPosibilities = function(ingredientes,unique){
       };
 
 
-//function getRecipeCode()
-
-
-
-
 module.exports = SearchModel;
-
-/*var IngredientModel = require('../models json/ingredient-model'),
-    IngredientController = () => {}*/
-
-
-    

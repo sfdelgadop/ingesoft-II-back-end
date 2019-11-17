@@ -2,7 +2,7 @@
 
 var CommentsModel = require('../models json/comments-model'),
 	CommentsController = () => {}
-
+//Llama la función que trae todos los comentarios y lo guaarda en un JSON
 CommentsController.getAll = (req, res, next) => {
 	CommentsModel.getAll((docs) => {
 		let locals = {
@@ -13,6 +13,7 @@ CommentsController.getAll = (req, res, next) => {
 		res.send(docs)
 	})
 }
+//Llama la función que trae un comentario y lo guarda en un JSON
 
 CommentsController.getOne = (req, res, next) => {
 	let comment_id = req.params.comment_id
@@ -27,6 +28,7 @@ CommentsController.getOne = (req, res, next) => {
 		res.send(locals)
 	})
 }
+//Llama la función que guarda un comentario 
 
 CommentsController.save = (req, res, next) => {
 	let comment = {
@@ -41,7 +43,7 @@ CommentsController.save = (req, res, next) => {
 
 	CommentsModel.save( comment, () => res.redirect('/ver-comments') )
 }
-
+//Llama la función que borra un comentario
 CommentsController.delete = (req, res, next) => {
 	let comment_id = req.params.comment_id
 	console.log(comments_id)

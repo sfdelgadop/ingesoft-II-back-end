@@ -7,6 +7,7 @@ var ObserverDP = require('./observer');
 var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
 
+//Llama la función que trae todos los comentarios y lo guaarda en un JSON
 RecipeController.getAll = (req, res, next) => {
 	console.log("hola")
 	RecipeModel.getAll((docs) => {
@@ -18,6 +19,7 @@ RecipeController.getAll = (req, res, next) => {
 		res.send( docs)
 	})
 }
+//Llama la función que trae una receta
 
 RecipeController.getOne = (req, res, next) => {
 	let recipe_id = req.params.recipe_id
@@ -32,6 +34,7 @@ RecipeController.getOne = (req, res, next) => {
 		res.send( locals)
 	})
 }
+//llama la funcion que trae las posibles combinaciones de ingredientes
 RecipeController.getPosibleRecipes = (req, res, next) => {
 	let ingredients = req.params.ingredients;
 	//console.log(req.params.ingredients);
@@ -46,11 +49,15 @@ RecipeController.getPosibleRecipes = (req, res, next) => {
 	})
 }
 
+//Llama la función que guarda una receta
 RecipeController.save = (req, res, next) => {
-	//console.log("hola "+req.body.ingredients);
+	//Calcula el valor hash de la receta y la guarda con ese id
 	var hash= SearchModel.hashRecipe(req.body.ingredients);
 	//console.log(SearchModel.getPosibilities(req.body.ingredients));
-	ObserverDP.getAll;
+	
+	//llama el observer que enviará correos notificacnod una nueva receta
+	ObserverDP.getAll(req.body.name);
+	
 	 
 	let recipe = {
 		id : hash,
@@ -60,14 +67,15 @@ RecipeController.save = (req, res, next) => {
 		description : req.body.description,
         procedure : req.body.procedure,
         photos : req.body.photos,
-        created_at : Date
+        created_at : req.body.created_at
 	}
 
-	console.log(recipe)
+	//console.log(recipe)
 
-	//RecipeModel.save( recipe, () => res.redirect('/ver-recipe') )
+	RecipeModel.save( recipe, () => res.redirect('/ver-recipe') )
 }
 
+//Llama la función que elimina una receta
 RecipeController.delete = (req, res, next) => {
 	let recipe_id = req.params.recipe_id
 	console.log(recipe_id)

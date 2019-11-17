@@ -2,7 +2,7 @@
 
 var LikesModel = require('../models json/likes-model'),
 	LikesController = () => {}
-
+//Llama la función que trae todos los comentarios
 LikesController.getAll = (req, res, next) => {
 	LikesModel.getAll((docs) => {
 		let locals = {
@@ -13,6 +13,7 @@ LikesController.getAll = (req, res, next) => {
 		res.send( locals)
 	})
 }
+//Llama la función que una region y la guarda en un JSON
 
 LikesController.getOne = (req, res, next) => {
 	let likes_id = req.params.likes_id
