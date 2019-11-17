@@ -54,9 +54,12 @@ app.use('/api/ingredient',require('./routes/ingredient'));*/
 //app.use(require('./routes/followers'));
 // routers
 
-app.use('/api', require('./routes/user'));
-app.use('/api', require('./routes/rol'));
-app.use('/api', require('./routes/followers'));
+//app.use('/api', require('./routes/user'));
+//app.use('/api', require('./DAO/userDAO'));
+app.use('/api', require('./controllers/user-controller'));
+//app.use('/api', require('./routes/user'));
+//app.use('/api', require('./routes/rol'));
+//app.use('/api', require('./routes/followers'));
 
 
 //starting the server
