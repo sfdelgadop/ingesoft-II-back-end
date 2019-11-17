@@ -24,6 +24,8 @@ var favicon = require('serve-favicon'),
 app
 	.use(cors())
 	.set('port', port)
+	.use(bodyParser.json({limit: '50mb'}))
+	.use(bodyParser.urlencoded({extended:true,limit:'50mb'}))
 
 	.use(favicon(faviconURL))
 
