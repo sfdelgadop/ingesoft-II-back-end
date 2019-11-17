@@ -36,11 +36,6 @@ RecipeModel.getPosibleRecipes = (ingredients,cb) => {
 	console.log(b.length-1);
 	
 	for(var i = 0, s = b.length-1; i < s; i++){
-		/*if(i<s-1){
-			hashes+= SearchModel.hashRecipe(b[i])+", ";
-		}else{
-			hashes+= SearchModel.hashRecipe(b[i]);
-		}*/
 		
 		 var e = conn.find({ $or : [{id : SearchModel.hashRecipe(b[i]) }]}).exec((err, docs) => {
 			if(err) throw err

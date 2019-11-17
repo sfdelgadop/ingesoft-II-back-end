@@ -2,7 +2,7 @@
 
 var conn = require('./region-connect'),
 	RegionModel = () => {}
-
+//Trae todas las regiones
     RegionModel.getAll = (cb) => {
 	conn
 		.find()
@@ -11,7 +11,7 @@ var conn = require('./region-connect'),
 			cb(docs)
 		})
 }
-
+//Trae una región
 RegionModel.getOne = (id, cb) => {
 	conn
 		.findOne({id_region : id})
@@ -28,12 +28,9 @@ function saveNotification1(data) {
         // saved!
     })
 }
-
+// guarda una región
 RegionModel.save = (data, cb) => {
-	console.log(data);
-	console.log(cb);
-	console.log("model");
-	console.log(data.id_region);
+	
 	conn
 			.count({id_region : data.id_region})
 		.exec((err, count) => {
@@ -65,7 +62,7 @@ RegionModel.save = (data, cb) => {
 			}
 		})
 }
-
+//Elimina una región
 RegionModel.delete = (id, cb) => {
 	conn.remove({id_region : id}, (err, docs) => {
 		if(err) throw err

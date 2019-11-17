@@ -3,7 +3,7 @@
 
 var conn = require('./ingredient-connect'),
 	IngredientModel = () => {}
-
+//Obtiene todos los ingredientes
     IngredientModel.getAll = (cb) => {
 	conn
 		.find()
@@ -12,7 +12,7 @@ var conn = require('./ingredient-connect'),
 			cb(docs)
 		})
 }
-
+//Obtiene un  ingrediente
 IngredientModel.getOne = (id, cb) => {
 	conn
 		.findOne({ingredient_id : id})
@@ -21,10 +21,9 @@ IngredientModel.getOne = (id, cb) => {
 			cb(docs)
 		})
 }
-
+//Guarda un ingrediente
 IngredientModel.save = (data, cb) => {
-	console.log("modelo")
-	console.log(data)
+	//console.log(data)
 	conn
 		.count({ingredient_id : data.ingredient_id})
 		.exec((err, count) => {
@@ -57,7 +56,7 @@ IngredientModel.save = (data, cb) => {
 			}*/
 		})
 }
-
+//Elimina un ingrediente
 IngredientModel.delete = (id, cb) => {
 	conn.remove({ingredient_id : id}, (err, docs) => {
 		if(err) throw err
