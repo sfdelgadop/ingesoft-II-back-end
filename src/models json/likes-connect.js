@@ -17,6 +17,8 @@ var mongoose = require('mongoose'),
 
     LikesModel = mongoose.model("Likes", LikesSchema)
     
+    //se realiza la conección con la base de datos
+
     mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`)
 
 

@@ -2,7 +2,7 @@
 
 var conn = require('./comments-connect'),
 	CommentsModel = () => {}
-
+//Obtiene todos los comentarios
     CommentsModel.getAll = (cb) => {
 	conn
 		.find()
@@ -11,7 +11,7 @@ var conn = require('./comments-connect'),
 			cb(docs)
 		})
 }
-
+//Obtiene un comentario
 CommentsModel.getOne = (id, cb) => {
 	conn
 		.findOne({comment_id : id})
@@ -20,8 +20,9 @@ CommentsModel.getOne = (id, cb) => {
 			cb(docs)
 		})
 }
-
+//guarda un comentario
 CommentsModel.save = (data, cb) => {
+	
 	conn
 		.count({dishId : data.dishId})
 		.exec((err, count) => {
@@ -37,7 +38,7 @@ CommentsModel.save = (data, cb) => {
 			}
 		})
 }
-
+//elimina un comentario
 CommentsModel.delete = (id, cb) => {
 	conn.remove({comment_id : id}, (err, docs) => {
 		if(err) throw err

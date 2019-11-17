@@ -5,11 +5,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
 
     RecipeSchema = new Schema({
-        recipe_id: Number,
+        id: Number,
         name: String,
         user_id: Number,
-        ingredients: {type: Schema.ObjectId, ref: "Ingredient"},
-        procedure: {}
+        image: String,
+        ingredients: {},
+        procedure: {},
+        created_at: Date
 
     },
     {    collection : "recipe"

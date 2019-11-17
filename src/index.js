@@ -49,12 +49,18 @@ module.exports = app
 app.use('/api/region',require('./routes/region'));
 app.use('/api/recipe',require('./routes/recipe'));
 app.use('/api/ingredient',require('./routes/ingredient'));*/
-app.use(require('./routes/user'));
-app.use(require('./routes/rol'));
-app.use(require('./routes/followers'));
+//app.use(require('./routes/user'));
+//app.use(require('./routes/rol'));
+//app.use(require('./routes/followers'));
 // routers
 
-app.use('/api/user', require('./routes/user'));
+//app.use('/api', require('./routes/user'));
+//app.use('/api', require('./DAO/userDAO'));
+app.use('/api', require('./controllers/user-controller'));
+//app.use('/api', require('./routes/user'));
+//app.use('/api', require('./routes/rol'));
+//app.use('/api', require('./routes/followers'));
+
 
 //starting the server
 app.listen(app.get('port'), () => {

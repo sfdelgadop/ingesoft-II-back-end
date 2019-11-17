@@ -10,10 +10,11 @@ RegionController = require('../controllers/region-controller'),
 	router = express.Router()
     
 router
-    
+    .get('/buscar-recipe',RecipeController)
     .get('/ver-recipe', RecipeController.getAll)
     .get('/agregar-recipe', RecipeController.addForm)
     .post('/crear-recipe', RecipeController.save)
+    .get('/buscar-recipe-by-ingredients/:ingredients', RecipeController.getPosibleRecipes)
     .get('/editar/:recipe_id', RecipeController.getOne)
     .put('/actualizar/:recipe_id', RecipeController.save)
     .delete('/eliminar/:recipe_id', RecipeController.delete)

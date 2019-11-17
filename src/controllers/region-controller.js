@@ -2,7 +2,7 @@
 
 var RegionModel = require('../models json/region-model'),
 	RegionController = () => {}
-
+//Llama la función que trae todos los comentarios y lo guaarda en un JSON
 RegionController.getAll = (req, res, next) => {
 	RegionModel.getAll((docs) => {
 		let locals = {
@@ -14,7 +14,7 @@ RegionController.getAll = (req, res, next) => {
 		res.send(locals)
 	})
 }
-
+//Llama la función que una region y la guarda en un JSON
 RegionController.getOne = (req, res, next) => {
 	let id_region = req.params.id_region
 	console.log(id_region)
@@ -28,11 +28,9 @@ RegionController.getOne = (req, res, next) => {
 		res.send(locals)
 	})
 }
-
+//Llama la función que guarda una región
 RegionController.save = (req, res) => {
-	console.log(req.body);
-	console.log(req.body.data);
-	console.log(req.body.id_region);
+	
 	 var region = {
 		
 		id_region : req.body.id_region,
@@ -40,12 +38,9 @@ RegionController.save = (req, res) => {
 		
 	}
 	
-	console.log("controlador")
-	console.log(region.name_region)
-	console.log(region.id_region)
 	RegionModel.save( region, () => res.redirect('/ver-region') )
 }
-
+//Llama la función que elimina una región
 RegionController.delete = (req, res, next) => {
 	let id_region = req.params.id_region
 	console.log(id_region)
