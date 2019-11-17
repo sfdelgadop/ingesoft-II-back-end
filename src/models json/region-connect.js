@@ -19,6 +19,7 @@ var mongoose = require('mongoose'),
   
     RegionModel = mongoose.model("Region", RegionSchema)
     
+        //se realiza la conección con la base de datos
     mongoose.connect(`mongodb:\/\/${conf.mongo.host}/${conf.mongo.db}`)
 
     

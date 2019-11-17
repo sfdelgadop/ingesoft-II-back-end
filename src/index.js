@@ -57,6 +57,11 @@ app.use('/api/ingredient',require('./routes/ingredient'));*/
 //app.use('/api', require('./routes/user'));
 //app.use('/api', require('./DAO/userDAO'));
 app.use('/api', require('./controllers/user-controller'));
+//app.use('/api', require('./routes/user'));
+//app.use('/api', require('./routes/rol'));
+//app.use('/api', require('./routes/followers'));
+
+
 //starting the server
 app.listen(app.get('port'), () => {
 	console.log(`server on port ${app.get('port')}`);
