@@ -1,5 +1,7 @@
 'use strict'
 
+var SearchModel = require('../controllers/search_ingredient');
+
 var conn = require('./recipe-connect'),
 	RecipeModel = () => {}
     
@@ -14,6 +16,7 @@ RecipeModel.getAll = (cb) => {
 		})
 }
 
+
 RecipeModel.getOne = (id, cb) => {
 	conn
 		.findOne({recipe_id : id})
@@ -23,22 +26,64 @@ RecipeModel.getOne = (id, cb) => {
             console.log(docs)
         })
 }
+RecipeModel.getPosibleRecipes = (ingredients,cb) => {
+	let a = String(ingredients)
+	a=a.split(",");
+	//console.log(a);
+	var b = SearchModel.getPosibilities(a);
+	//console.log(b);
+	var hashes= [];
+	console.log(b.length-1);
+	
+	for(var i = 0, s = b.length-1; i < s; i++){
+		/*if(i<s-1){
+			hashes+= SearchModel.hashRecipe(b[i])+", ";
+		}else{
+			hashes+= SearchModel.hashRecipe(b[i]);
+		}*/
+		
+		 var e = conn.find({ $or : [{id : SearchModel.hashRecipe(b[i]) }]}).exec((err, docs) => {
+			if(err) throw err
+			//cb(docs)
+			if(docs.length==1){
+			//console.log(docs[0]);
+			hashes.push(docs[0]);
+			}
+		});
+		console.log(hashes);
+	}
+	//hashes+="]"
+	//hashes = String(hashes);
+	console.log(hashes);
+	
+	conn
+		.find({ $or: [{ id : {$in: [hashes.length-1]}}]})
+		.exec((err, docs) => {
+			if(err) throw err
+			if(docs.length==1){
+				//console.log(docs[0]);
+				hashes.push(docs[0]);
+				}
+            cb(hashes)
+            console.log(docs)
+        })
+}
 
 RecipeModel.save = (data, cb) => {
 	conn
-		.count({recipe_id : data.recipe_id})
+		.count({id : data.id})
 		.exec((err, count) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
 
-			if(count == 0)
-			{
-				conn.insert(data, (err) => {
+			if(count != -1)
+			{ 
+				conn.create(data, (err) => {
 					if(err) throw err
 					cb()
 				})
 			}
-			else if(count == 1)
+			/*else if(count == 1)
 			{
 				conn.findOneAndUpdate(
 					{recipe_id : data.recipe_id},
@@ -56,7 +101,7 @@ RecipeModel.save = (data, cb) => {
 						cb()
 					}
 				)
-			}
+			}*/
 		})
 }
 

@@ -1,5 +1,9 @@
 'use strict'
 
+var SearchModel = require('./search_ingredient');
+
+var ObserverDP = require('./observer');
+
 var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
 
@@ -28,21 +32,40 @@ RecipeController.getOne = (req, res, next) => {
 		res.send( locals)
 	})
 }
+RecipeController.getPosibleRecipes = (req, res, next) => {
+	let ingredients = req.params.ingredients;
+	//console.log(req.params.ingredients);
+	
+	RecipeModel.getPosibleRecipes(ingredients, (docs) => {
+		let locals = {
+			title : 'Recetas',
+			data : docs
+		}
+
+		res.send( locals)
+	})
+}
 
 RecipeController.save = (req, res, next) => {
+	//console.log("hola "+req.body.ingredients);
+	var hash= SearchModel.hashRecipe(req.body.ingredients);
+	//console.log(SearchModel.getPosibilities(req.body.ingredients));
+	ObserverDP.getAll;
+	 
 	let recipe = {
-		recipe_id : req.body.recipe_id,
+		id : hash,
 		name : req.body.name,
 		user_id : req.body.user_id,
 		ingredients : req.body.ingredients,
+		description : req.body.description,
         procedure : req.body.procedure,
         photos : req.body.photos,
-        created_at : req.body.created_at
+        created_at : Date
 	}
 
 	console.log(recipe)
 
-	RecipeModel.save( recipe, () => res.redirect('/ver-recipe') )
+	//RecipeModel.save( recipe, () => res.redirect('/ver-recipe') )
 }
 
 RecipeController.delete = (req, res, next) => {

@@ -22,6 +22,8 @@ CommentsModel.getOne = (id, cb) => {
 }
 
 CommentsModel.save = (data, cb) => {
+	console.log("holaaaa");
+	
 	conn
 		.count({dishId : data.dishId})
 		.exec((err, count) => {

@@ -31,14 +31,14 @@ IngredientModel.save = (data, cb) => {
 			if(err) throw err
 			console.log(`Número de Docs: ${count}`)
 
-			if(count == 0)
+			if(count != -1)
 			{
 				conn.create(data, (err) => {
 					if(err) throw err
 					cb()
 				})
 			}
-			else if(count == 1)
+			/*else if(count == 1)
 			{
 				conn.findOneAndUpdate(
 					{ingredient_id : data.ingredient_id},
@@ -54,7 +54,7 @@ IngredientModel.save = (data, cb) => {
 						cb()
 					}
 				)
-			}
+			}*/
 		})
 }
 
