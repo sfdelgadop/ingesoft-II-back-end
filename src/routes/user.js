@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const mysqlConnection = require('../database');
 const helper = require('../lib/helpers');
+let {user} = require('../models json/userModel'); 
 // GET all Users
 //optiene todos los usuarios
 router.get('/users', async (_req, res) => {
@@ -32,16 +33,19 @@ router.get('/users/:id', (req, res) => {
 //crea un usuario en la base de datos
 router.post('/users', async (req, res) => {
   //guarda en un json los datos recibidos para la base de datos
-  const { firstName, lastName, username, email, password, age, gender } = req.body;
-  const encrypted = await helper.encryptPassword(password);//guarda contraseña recibida del formulario web
-  mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);', [encrypted, firstName, lastName, username, email, age, gender],
+  //const { firstName, lastName, username, email, password, age, gender } = req.body;
+  user = req.body;
+  console.log(user);
+  const encrypted = await helper.encryptPassword(user.password);//guarda contraseña recibida del formulario web
+  mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);', 
+  [encrypted, user.firstName, user.lastName, user.username, user.email, user.age, user.gender],
     async(err, rows, fields) => {
       if (!err) {
         return res.json({ status: 'done' });
       } else {
-        if(err.sqlMessage==="Duplicate entry '"+username+"' for key 'username'"){//en caso que el usuario ya este registrado
+        if(err.sqlMessage==="Duplicate entry '"+user.username+"' for key 'username'"){//en caso que el usuario ya este registrado
           return res.json({ status: 'username was registred'});
-        }else if (err.sqlMessage==="Duplicate entry '"+email+"' for key 'email'") {//en caso de que que el email exista
+        }else if (err.sqlMessage==="Duplicate entry '"+user.email+"' for key 'email'") {//en caso de que que el email exista
           return res.json({ status: 'email already exist'});
         }
       }
