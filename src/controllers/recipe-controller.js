@@ -67,7 +67,7 @@ RecipeController.save = (req, res, next) => {
 		description : req.body.description,
         procedure : req.body.procedure,
         photos : req.body.photos,
-        created_at : req.body.created_at
+        created_at : req.body.date
 	}
 
 	//console.log(recipe)
