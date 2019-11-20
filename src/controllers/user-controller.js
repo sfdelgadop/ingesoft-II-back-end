@@ -39,45 +39,25 @@ router.post('/login', async (req, res) => {
   }
 
 });
+//Crear usuario
 //guarda en un json los datos recibidos para la base de datos
 router.post('/users', async (req, res) => {
   let userjson = await req.body;
-  let exists = await DAO.loginUser(userjson.username);;
+  let exists = await DAO.loginUser(userjson.username);
   //verifica que el usuario no este registrado
-  if(exists[0]!=undefined){
-    res.status(401).send('Unsername have registred');//si el nombre de usuario ya existe
-  }else{
-    console.log(userjson);
-    //guarda el usuario recibido
-    user.userAdd = await DAO.loginUser(userjson);
-    res.status(200).send('Unsername not have registred');
+  if (exists[0] != undefined) {
+    res.status(401).send('Unsername was registred');//si el nombre de usuario ya existe
+  } else {
+    let existsemail = await DAO.emailUser(userjson.email);
+    if (existsemail[0] != undefined) {
+      res.status(401).send('email was registred');//si el email de usuario ya existe
+    }else{
+    userjson.password = await helper.encryptPassword(userjson.password);//guarda contraseña recibida del formulario web
+    //guarda el usuario recibido en la base de datos
+    user.userAdd = await DAO.createUser(userjson);
+    res.status(200).send('Unsername has been created');
+    }
+
   }
 });
-
-
-
-
-
-
-
-
-
-/*user = req.body;
-console.log(user);
-const encrypted = await helper.encryptPassword(user.password);//guarda contraseña recibida del formulario web
-mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);', 
-[encrypted, user.firstName, user.lastName, user.username, user.email, user.age, user.gender],
-  async(err, rows, fields) => {
-    if (!err) {
-      return res.json({ status: 'done' });
-    } else {
-      if(err.sqlMessage==="Duplicate entry '"+user.username+"' for key 'username'"){//en caso que el usuario ya este registrado
-        return res.json({ status: 'username was registred'});
-      }else if (err.sqlMessage==="Duplicate entry '"+user.email+"' for key 'email'") {//en caso de que que el email exista
-        return res.json({ status: 'email already exist'});
-      }
-    }
-  });
-
-});*/
 module.exports = router;
