@@ -6,7 +6,7 @@ var nodemailer = require('nodemailer');
 var ObserverDP = () => {}
 
 //obtiene todos los usuarios y guarda sus correos en un arreglo
-ObserverDP.getAll = async function(name_recipe){
+ObserverDP.getAll = async function(name_recipe,_req, res){
 
     var query = await mysqlConnection.query('SELECT * FROM Users');
     var us= {};
@@ -30,11 +30,11 @@ ObserverDP.getAll = async function(name_recipe){
     mails+="'";
     //console.log(mails);
     //Llama a la función que envia los correos recibiendo un arreglo de correos y el nombre de la receta
-    ObserverDP.sendMails(mails,name_recipe);
+    ObserverDP.sendMails(mails,name_recipe, res);
     
 }
       
-ObserverDP.sendMails = function(mails,name_recipe){
+ObserverDP.sendMails = function(mails,name_recipe, res){
     
     //console.log(mails);
     // Definimos el transporter
@@ -57,10 +57,10 @@ ObserverDP.sendMails = function(mails,name_recipe){
     transporter.sendMail(mailOptions, function(error, info){
         if (error){
             console.log(error);
-            res.send(500, err.message);
+            //res.send(500, err.message);
         } else {
             console.log("Email sent");
-            res.status(200).jsonp(req.body);
+            //res.status(200).jsonp(req.body);
         }
     });
     };
