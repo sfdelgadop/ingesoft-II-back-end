@@ -16,6 +16,7 @@ describe('get all users: ',()=>{
      });
     });
 
+
     describe('get all role: ',()=>{
      it('should get all role', (done) => {
      chai.request(url)
@@ -28,9 +29,9 @@ describe('get all users: ',()=>{
      });
     });
 
-
-    describe('get all role: ',()=>{
-     it('should get all role', (done) => {
+    
+describe('get all follows: ',()=>{
+     it('should get all follows', (done) => {
      chai.request(url)
      .get('/api/follows')
      .end( function(err,res){
@@ -40,5 +41,3 @@ describe('get all users: ',()=>{
      });
      });
     });
-
- 

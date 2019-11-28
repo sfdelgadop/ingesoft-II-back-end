@@ -31,8 +31,9 @@ router.post('/login', async (req, res) => {
   }
   let dbpassword = await userjson[0].password;//contraseña encriptada de la base de datos
   console.log(dbpassword);
-  let compare = await helper.matchPassword(user.userLogin.password, dbpassword);//metodo  de comparacion de contraseñas  
-  if (compare) {
+  console.log(user.userLogin.password);
+  //let compare = await helper.matchPassword(user.userLogin.password, dbpassword);//metodo  de comparacion de contraseñas  
+  if (dbpassword==user.userLogin.password) {
     res.status(200).send('authorized user');//usuario autorizado
   } else {
     res.status(401).send('wrong password');//contraseña incorrecta
