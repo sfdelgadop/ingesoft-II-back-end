@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "express-method-override": "0.0.3",
     "express-mysql-session": "^2.1.0",
-    "express-session": "^1.17.0",
+    "express-session": "^1.15.6",
     "jade": "^1.11.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.5",
@@ -39,6 +39,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "serve-favicon": "^2.5.0",
+    "session-file-store": "^1.2.0",
     "underscore": "^1.9.1",
     "validator": "^11.1.0"
   }
