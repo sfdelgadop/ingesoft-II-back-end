@@ -3,114 +3,149 @@ const router = Router();
 const mysqlConnection = require('../database');
 const helper = require('../lib/helpers');
 let {user} = require('../models json/userModel'); 
+const jwt = require('jsonwebtoken');
+
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const auth = passport.authenticate('jwt', { session: false });
+
+let ExtractJwt = passportJWT.ExtractJwt;
+let JwtStrategy = passportJWT.Strategy;
+
+let jwtOptions = {};
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+jwtOptions.secretOrKey = 'wowwow';
+
+// lets create our strategy for web token
+let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
+  console.log('payload received', jwt_payload);
+  let user = getUser({ id: jwt_payload.id });
+
+  if (user) {
+    next(null, user);
+  } else {
+    next(null, false);
+  }
+});
+// use the strategy
+passport.use(strategy);
 // GET all Users
 //optiene todos los usuarios
-router.get('/users', async (_req, res) => {
-  mysqlConnection.query('SELECT * FROM Users', (err, rows, fields) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(rows);
-    }
+ // create some helper functions to work on the database
+ 
+//-----------SEQUELIZE------------------------
+const Sequelize = require ('sequelize'); 
+// inicializa una instancia de Sequelize 
+const sequelize = new Sequelize ({ 
+  database: 'users_db', 
+  username: 'root', 
+  password: 'password', 
+  dialect: 'mysql', 
+}); 
+// verifique la secuencia de conexión de 
+sequelize 
+  .authenticate () 
+  .then (() => console.log ('La conexión se ha establecido con éxitos.')) 
+  .catch (err => console.error ('No se puede conectar a la base de datos: ', err));
+
+
+// create user model
+const User = sequelize.define('user', {
+    
+    password: {
+      type: Sequelize.STRING,
+    },
+    name_user: {
+        type: Sequelize.STRING,
+      },
+    last_name: {
+        type: Sequelize.STRING,
+      },
+    username: {
+        type: Sequelize.STRING,
+      },
+    email: {
+        type: Sequelize.STRING,
+      },
+    id_rolf: {
+        type: Sequelize.INTEGER,
+      },
+    age: {
+        type: Sequelize.INTEGER,
+      },
+     gender: {
+        type: Sequelize.STRING,
+      },
+    followers: {
+        type: Sequelize.INTEGER,
+      },
+    followings: {
+        type: Sequelize.INTEGER,
+      },
+    favourities: {
+        type: Sequelize.INTEGER,
+      }
   });
+  
+  // create table with user model
+  User.sync()
+    .then(() => console.log('User table created successfully'))
+    .catch(err => console.log('oooh, did you enter wrong database credentials?'));
+  
 
-});
+ const createUser = async ({ password, name_user, last_name, username, email, id_rolf, age, gender, followers, followings, favourities }) => {
+  return await User.create({ password, name_user, last_name, username, email, id_rolf, age, gender, followers, followings, favourities });
+};
 
-// GET any User
-//optiene algun usuario en particular
-router.get('/users/:id', (req, res) => {
-  const { id } = req.params;
-  mysqlConnection.query('SELECT * FROM Users WHERE id_user = ?', [id], (err, rows, fields) => {
-    if (!err) {
-      res.json(rows);
-    } else {
-      console.log(err);
-    }
+const getAllUsers = async () => {
+  return await User.findAll();
+};
+
+const getUser = async obj => {
+  return await User.findOne({
+    where: obj,
   });
+};
+
+
+
+// get all users
+router.get('/users', auth, function(req, res) {
+  getAllUsers().then(user => res.json(user));
 });
 
-//POST User 
-//crea un usuario en la base de datos
-router.post('/users', async (req, res) => {
-  //guarda en un json los datos recibidos para la base de datos
-  //const { firstName, lastName, username, email, password, age, gender } = req.body;
-  user = req.body;
-  console.log(user);
-  const encrypted = await helper.encryptPassword(user.password);//guarda contraseña recibida del formulario web
-  mysqlConnection.query('INSERT INTO Users VALUES (null, ?, ?, ?, ?, ?, 2, ?, ?, 0, 0, 0);', 
-  [encrypted, user.firstName, user.lastName, user.username, user.email, user.age, user.gender],
-    async(err, rows, fields) => {
-      if (!err) {
-        return res.json({ status: 'done' });
-      } else {
-        if(err.sqlMessage==="Duplicate entry '"+user.username+"' for key 'username'"){//en caso que el usuario ya este registrado
-          return res.json({ status: 'username was registred'});
-        }else if (err.sqlMessage==="Duplicate entry '"+user.email+"' for key 'email'") {//en caso de que que el email exista
-          return res.json({ status: 'email already exist'});
-        }
-      }
-    });
-
+// register route
+router.post('/register', function(req, res, next) {
+  const { password, name_user, last_name, username, email, id_rolf, age, gender, followers, followings, favourities } = req.body;
+  createUser({ password, name_user, last_name, username, email, id_rolf, age, gender, followers, followings, favourities }).then(user =>
+    res.json({ user, msg: 'account created successfully' })
+  );
 });
-//10 noviembre comparacion de contraseña de login con contraseña base de datos 
-//carga los datos para validacion de login
-router.post('/login', async (req, res) => {
-  const { username, password } = await req.body;
-  let dbpassword;//contraseña guardada en la base de datos
-  mysqlConnection.query('SELECT password FROM Users WHERE username = ?;',
-    [username],
-    async (err, rows, fields) => {
-      if (!err) {
-        if(rows.toString()==''){//en caso de que el usuario no exista
-          res.json({ status: 'username not exist' });
-        }else{
-        dbpassword = await rows[0].password;//optiene contraseña cifrada de la base de datos
-        let compare = await helper.matchPassword(password, dbpassword);//metodo  de comparacion de contraseñas
-        if (compare) {
-          res.json({ status: 'done' });
-        } else {
-          res.json({ status: 'authentication failed' });//la contraseña es incorrecta
-        }
-      }
-      } else {
-        console.log(err);//caso de error del método 
-      }
+
+//login route
+router.post('/login', async function(req, res, next) {
+  console.log("here pass");
+  const { username, password } = req.body;
+  if (username && password) {
+    let user = await getUser({ username: username });
+    if (!user) {
+      res.status(401).json({ msg: 'No such user found' });
     }
-  )
-});
-
-//PUT User  
-//actualiza usuarios
-router.put('/users', (req, res) => {
-
-  const { firstName, lastName, username, email, password, age, gender } = req.body;
-  mysqlConnection.query('UPDATE Users SET password = ?, name_user = ?,last_name = ?,username = ?,'
-    + 'email = ?,'
-    + 'age = ?,'
-    + 'gender = ?'
-    + 'WHERE email = ?', [password, firstName, lastName, username, email, age, gender, email], (err, rows, fields) => {
-      if (!err) {
-        res.json({ status: 'done' });
-      } else {
-        console.log(err);
-      }
-    });
-
-});
-
-//DELETE User  
-//elimina usuarios de la base de datos
-router.delete('/users', (req, res) => {
-
-  const { id_user } = req.body;
-  mysqlConnection.query('DELETE FROM Users WHERE id_user=?;', [id_user], (err, rows, fields) => {
-    if (!err) {
-      res.json({ status: 'done' });
+    if (user.password === password) {
+      // from now on we'll identify the user by the id and the id is the 
+      // only personalized value that goes into our token
+      let payload = { id: user.id };
+      let token = jwt.sign(payload, jwtOptions.secretOrKey);
+      res.json({ msg: 'ok', token: token });
     } else {
-      console.log(err);
+      res.status(401).json({ msg: 'Password is incorrect' });
     }
-  });
+  }
+});
 
+// protected route
+router.get('/protected', auth, function(req, res) {
+  res.json('Success! You can now see this without a token.');
 });
 //exporta el modulo de conexion con mysql
 module.exports = router;
