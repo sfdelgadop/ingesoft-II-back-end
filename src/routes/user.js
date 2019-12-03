@@ -37,7 +37,7 @@ passport.use(strategy);
 const Sequelize = require ('sequelize'); 
 // inicializa una instancia de Sequelize 
 const sequelize = new Sequelize ({ 
-  database: 'users_db', 
+  database: 'relational_db', 
   username: 'root', 
   password: 'password', 
   dialect: 'mysql', 
