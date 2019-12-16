@@ -6,9 +6,9 @@ var ObserverDP = require('./observer');
 
 var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
-
+	const passport = require('passport');
 //Llama la función que trae todos los comentarios y lo guaarda en un JSON
-RecipeController.getAll = (req, res, next) => {
+RecipeController.getAll =  (req, res, next) => {
 	console.log("hola")
 	RecipeModel.getAll((docs) => {
 		let locals = {
@@ -34,6 +34,23 @@ RecipeController.getOne = (req, res, next) => {
 		res.send( locals)
 	})
 }
+
+RecipeController.getRecipe = (req, res, next) => {
+	let name = req.params.recipe
+	//console.log(req)
+	console.log(name);
+	
+
+	RecipeModel.getRecipe(name, (docs) => {
+		let locals = {
+			title : 'Receta',
+			data : docs
+		}
+ 
+		res.send( locals)
+	})
+}
+
 //llama la funcion que trae las posibles combinaciones de ingredientes
 RecipeController.getPosibleRecipes = (req, res, next) => {
 	let ingredients = req.params.ingredients;
