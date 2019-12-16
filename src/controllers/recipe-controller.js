@@ -6,9 +6,9 @@ var ObserverDP = require('./observer');
 
 var RecipeModel = require('../models json/recipe-model'),
 	RecipeController = () => {}
-
+	const passport = require('passport');
 //Llama la función que trae todos los comentarios y lo guaarda en un JSON
-RecipeController.getAll = (req, res, next) => {
+RecipeController.getAll =  (req, res, next) => {
 	console.log("hola")
 	RecipeModel.getAll((docs) => {
 		let locals = {
