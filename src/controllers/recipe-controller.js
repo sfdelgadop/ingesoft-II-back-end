@@ -46,7 +46,7 @@ RecipeController.getRecipe = (req, res, next) => {
 			title : 'Receta',
 			data : docs
 		}
-
+ 
 		res.send( locals)
 	})
 }
