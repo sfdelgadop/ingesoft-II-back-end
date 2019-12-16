@@ -39,7 +39,7 @@ const Sequelize = require ('sequelize');
 const sequelize = new Sequelize ({ 
   database: 'relational_db', 
   username: 'root', 
-  password: 'password', 
+  password: 'admin', 
   dialect: 'mysql', 
 }); 
 // verifique la secuencia de conexión de 

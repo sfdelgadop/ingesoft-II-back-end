@@ -50,6 +50,7 @@ RecipeController.getRecipe = (req, res, next) => {
 		res.send( locals)
 	})
 }
+
 //llama la funcion que trae las posibles combinaciones de ingredientes
 RecipeController.getPosibleRecipes = (req, res, next) => {
 	let ingredients = req.params.ingredients;

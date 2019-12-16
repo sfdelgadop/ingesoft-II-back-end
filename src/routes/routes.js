@@ -15,6 +15,7 @@ RegionController = require('../controllers/region-controller'),
     .get('/agregar-recipe',auth, RecipeController.addForm)
     .post('/crear-recipe',auth, RecipeController.save)
     .get('/buscar-recipe-by-ingredients/:ingredients',auth, RecipeController.getPosibleRecipes)
+    .get('/buscar-recipe-by-name/:name',auth, RecipeController.getRecipe)
     .get('/editar/:recipe_id',auth, RecipeController.getOne)
     .put('/actualizar/:recipe_id',auth, RecipeController.save)
     .delete('/eliminar/:recipe_id',auth, RecipeController.delete)
