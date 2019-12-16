@@ -7,8 +7,10 @@ const morgan = require('morgan');
 const app = express();
 //settings
 
+const passport = require('passport');
 //app.set('port',process.env.PORT || 4000)
 
+//-----------------------------------------------------
 
 var favicon = require('serve-favicon'),
 	bodyParser = require('body-parser'),
@@ -20,7 +22,7 @@ var favicon = require('serve-favicon'),
 	publicDir = express.static(`${__dirname}/public`),
 	viewDir = `${__dirname}/views`,
 	port = (process.env.PORT || 3000 || 27017 || 4000)
-
+	app.use(passport.initialize());
 app
 	.use(cors())
 	.set('port', port)
@@ -58,11 +60,12 @@ app.use('/api/ingredient',require('./routes/ingredient'));*/
 
 //app.use('/api', require('./routes/user'));
 //app.use('/api', require('./DAO/userDAO'));
-app.use('/api', require('./controllers/user-controller'));
-//app.use('/api', require('./routes/user'));
-//app.use('/api', require('./routes/rol'));
-//app.use('/api', require('./routes/followers'));
-
+//app.use('/api', require('./controllers/user-controller'));
+app.use('/api', require('./routes/user'));
+app.use('/api', require('./routes/rol'));
+app.use('/api', require('./routes/followers'));
+// set some basic routes
+ 
 
 //starting the server
 app.listen(app.get('port'), () => {
