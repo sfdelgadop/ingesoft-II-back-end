@@ -26,6 +26,17 @@ RecipeModel.getOne = (id, cb) => {
             console.log(docs)
         })
 }
+
+RecipeModel.getRecipe = (name, cb) => {
+	conn
+		.findOne({name : name})
+		.exec((err, docs) => {
+			if(err) throw err
+            cb(docs)
+            console.log(docs)
+        })
+}
+
 RecipeModel.getPosibleRecipes = (ingredients,cb) => {
 	let a = String(ingredients)
 	a=a.split(",");
