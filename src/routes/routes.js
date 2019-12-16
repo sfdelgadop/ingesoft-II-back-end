@@ -15,6 +15,7 @@ router
     .get('/agregar-recipe', RecipeController.addForm)
     .post('/crear-recipe', RecipeController.save)
     .get('/buscar-recipe-by-ingredients/:ingredients', RecipeController.getPosibleRecipes)
+    .get('/buscar-recipe-by-name/:recipe', RecipeController.getRecipe)
     .get('/editar/:recipe_id', RecipeController.getOne)
     .put('/actualizar/:recipe_id', RecipeController.save)
     .delete('/eliminar/:recipe_id', RecipeController.delete)
